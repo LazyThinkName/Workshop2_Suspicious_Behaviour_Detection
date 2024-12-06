@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Suspicious Behavior Detection</title>
+    <style>
+        /* Reset and global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 15px 20px;
+            border-bottom: 2px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #000;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .search-bar button {
+            padding: 6px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Main Section */
+        main {
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+            margin-left: 10px; 
+        }
+
+        .section {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .box {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .box.problem-statement {
+            flex: 2; 
+        }
+
+        .box.objective {
+            flex: 1; 
+        }
+
+        .box h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .box.problem-statement h3 {
+            font-size: 20px;
+        }
+
+        .box ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .box ul li {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .footer-text {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">Logo</div>
+        <nav>
+            <a href="#" class="active">Home</a>
+            <a href="#">Real-time Camera</a>
+            <a href="offenderlist.html">Offender's List</a>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h2>Suspicious Behavior Detection using Deep Learning</h2>
+            <div class="section">
+                <!-- Problem Statement Section -->
+                <div class="box problem-statement">
+                    <h3>Problem Statement</h3>
+                    <ul>
+                        <li><strong>Inefficiency in Real-Time Suspicious or Violent Behavior Detection:</strong> Traditional surveillance systems rely on manual monitoring, making it difficult to detect violent behaviors quickly in real-time, especially in crowded or high-risk areas. This delay in identifying potential threats increases the risk of harm and reduces the effectiveness of timely responses.</li>
+                        <li><strong>Lack of Long-Term Tracking and Identification of Repeat Offenders:</strong> Most Current security systems do not incorporate behavior detection with mechanisms for tracking repeat offenders over time. This limitation allows individuals who engage in repeated violent behavior to go unflagged, comprimising safety in public and private spaces.</li>
+                        <li><strong>High Dependency on Human Supervision and Resulting Human Error:</strong> Human-operated surveillance is prone to oversight, as security personnel can miss or misinterpret crucial signs of aggression due to fatigue or distraction. Additionally, the frequency of false alarm overwhelms security personnel, leading to slower response times and less effective threat management.
+                </div>
+
+                <!-- Objective Section -->
+                <div class="box objective">
+                    <h3>Objective</h3>
+                    <ul>
+                        <li>To develop an AI-based system for proactive real-time suspicious or violent behavior detection.</li>
+                        <li>To enable long-term offender tracking through integrated behavior detection and facial recognition.</li>
+                        <li>To minimize human error and response time in surveillance operations.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-text"> enjoy our project</div>
+    </main>
+</body>
+</html>

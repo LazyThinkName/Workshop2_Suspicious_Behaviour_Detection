@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Offender's List</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .offender-item span, .offender-item small {
+            display: block;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 15px 20px;
+            border-bottom: 2px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #000;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .search-bar button {
+            padding: 6px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Main Offender Display */
+        .offender-main {
+            flex: 3;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .offender-details {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .offender-details span {
+            flex: 1;
+            text-align: center;
+        }
+
+        .offender-details button {
+            padding: 5px 10px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .offender-details button:hover {
+            background-color: #c82333;
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        /* Sidebar List */
+        .filter-calendar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-calendar input {
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .filter-calendar button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .filter-calendar button:hover {
+            background-color: #0056b3;
+        }
+
+        .filter-calendar button #reset-filter-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .filter-calendar button #reset-filter-button:hover {
+            background-color: #0056b3;
+        }
+
+        .offender-sidebar {
+            flex: 1;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            max-height: 600px;
+        }
+
+        .offender-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .offender-item:hover {
+            background-color: #e0e0e0;
+        }
+
+        .offender-item span {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .offender-item small {
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">Logo</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Real-time Camera</a>
+            <a href="#" class="active">Offender's List</a>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+    </header>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Main Offender Display -->
+        <div class="offender-main" id="offender-main">
+            <div class="filter-calendar">
+                <label for="filter-date">Filter by Date:</label>
+                <input type="date" id="filter-date" />
+                <button onclick="filterByDate()">Filter</button>
+                <button id="reset-filter-button" onclick="resetFilter()">Reset Filter</button>
+            </div>
+            <div class="video-placeholder" id="video-placeholder">
+                Video/Media Placeholder for Offender
+            </div>
+            <div class="offender-details" id="offender-details">
+                <span><strong>Day:</strong> - </span>
+                <span><strong>Date:</strong></span>
+                <span><strong>Time:</strong> - </span>
+                <span><strong>Crime:</strong> - </span>
+                <button id="delete-offender-button" onclick="deleteOffender()">Delete</button>
+            </div>
+            <div class="image-grid" id="image-grid"></div>
+        </div>
+
+        <!-- Sidebar List -->
+        <div class="offender-sidebar" id="offender-sidebar"></div>
+    </div>
+
+    <script>
+        async function fetchOffenders() {
+            const response = await fetch('/api/offenders');
+            return await response.json();
+        }
+
+        async function renderOffenders() {
+            const offenders = await fetchOffenders();
+            const offenderSidebar = document.getElementById('offender-sidebar');
+            offenderSidebar.innerHTML = '';
+            
+            offenders.forEach((offender, index) => {
+                const offenderItem = document.createElement('div');
+                offenderItem.classList.add('offender-item');
+                offenderItem.innerHTML = `
+                <span>Offender ${offender.id}</span>
+                <small>Date: ${offender.date}</small>
+                <small>Time: ${offender.time}</small>
+                `;
+                offenderItem.onclick = () => displayOffender(offender);
+                offenderSidebar.appendChild(offenderItem);
+            });
+        }
+
+        function displayOffender(offender) {
+            const videoPlaceholder = document.getElementById('video-placeholder');
+            const offenderDetails = document.getElementById('offender-details');
+            const imageGrid = document.getElementById('image-grid');
+        
+            videoPlaceholder.innerHTML = `
+            <video controls width="100%">
+            <source src="${offender.video}" type="video/mp4">
+            Your browser does not support the video tag.
+            </video>`;
+
+            offenderDetails.innerHTML = `
+                <span><strong>Day:</strong> ${offender.day}</span>
+                <span><strong>Date:</strong> ${offender.date || '-'}</span>
+                <span><strong>Time:</strong> ${offender.time}</span>
+                <span><strong>Crime:</strong> ${offender.crime}</span>
+                <button onclick="confirmDelete(${offender.id})">Delete</button>
+            `;
+
+            imageGrid.innerHTML = offender.images
+                .map(img => `<img src="${img}" alt="Offender Image">`)
+                .join('');
+        }
+
+        function filterByDate() {
+        const selectedDate = document.getElementById('filter-date').value;
+        if (!selectedDate) {
+            alert("Please select a date to filter!");
+            return;
+        }
+
+        fetchOffenders().then(offenders => {
+            const filteredOffenders = offenders.filter(offender => offender.date === selectedDate);
+            const offenderSidebar = document.getElementById('offender-sidebar');
+            offenderSidebar.innerHTML = '';
+
+            if (filteredOffenders.length === 0) {
+                offenderSidebar.innerHTML = '<p>No offenders found for the selected date.</p>';
+                return;
+            }
+
+            filteredOffenders.forEach(offender => {
+                const offenderItem = document.createElement('div');
+                offenderItem.classList.add('offender-item');
+                offenderItem.innerHTML = `
+                    <span>Offender ${offender.id}</span> <br>
+                    <small>Date: ${offender.date}</small> <br>
+                    <small>Time: ${offender.time}</small>
+                `;
+                offenderItem.onclick = () => displayOffender(offender);
+                offenderSidebar.appendChild(offenderItem);
+            });
+        });
+    }
+
+        function confirmDelete(id) {
+            const confirmation = confirm("Are you sure you want to delete this offender?");
+            if (confirmation) {
+                deleteOffender(id);
+            }
+        }
+
+        function resetFilter() {
+        fetchOffenders().then(offenders => {
+            const offenderSidebar = document.getElementById('offender-sidebar');
+            offenderSidebar.innerHTML = '';
+
+            offenders.forEach(offender => {
+                const offenderItem = document.createElement('div');
+                offenderItem.classList.add('offender-item');
+                offenderItem.innerHTML = `
+                    <span>Offender ${offender.id}</span> <br>
+                    <small>Date: ${offender.date}</small> <br>
+                    <small>Time: ${offender.time}</small>
+                `;
+                offenderItem.onclick = () => displayOffender(offender);
+                offenderSidebar.appendChild(offenderItem);
+            });
+        });
+    }
+        
+
+        async function deleteOffender(id) {
+            await fetch(`/api/offenders/${id}`, { method: 'DELETE' });
+            renderOffenders();
+        }
+
+        renderOffenders();
+    </script>
+</body>
+</html>
